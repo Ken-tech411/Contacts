@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/index.css">
+</head>
+
+<body>
+    <div class="center">
+        <img src="/63f13644-bda5-4393-b94a-078930669517_200x200.png" style="margin-right: 10px;">
+        <input type="text" placeholder="Write" id="value" class="SearchBar">
+        <button id="addbtn" class="button">Add</button>
+    </div>
+    <div id="app">
+
+    </div>
+</body>
+<script>
+    let arr = ["Kiên", "Triết", "A Duy"]
+    let addbtn = document.getElementById("addbtn")
+    let delbtn = document.getElementsByClassName("delbtn")
+    searchBar = document.querySelector(".SearchBar")
+
+    searchBar.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            input = document.getElementById("value")
+            arr.push(input.value)
+            generatorArray()
+            input.value = ""
+        }
+    });
+    function generatorArray() {
+        list = document.createElement('ul')
+        for (let i = 0; i < arr.length; i++) {
+            let li = document.createElement('li')
+            li.innerHTML = `<span style="margin-right: 10px;">${arr[i]}</span><button class="delbtn button" data-index="${i}">Delete</button>`
+            list.appendChild(li)
+        }
+        var app = document.getElementById('app');
+        app.innerHTML = ""
+        app.appendChild(list);
+
+        for (let i = 0; i < arr.length; i++) {
+            delbtn[i].addEventListener("click", function () {
+                let id = this.getAttribute("data-index")
+                arr.splice(id, 1)
+                generatorArray()
+            })
+        }
+    }
+    generatorArray()
+
+    addbtn.addEventListener("click", function () {
+        input = document.getElementById("value")
+        arr.push(input.value)
+        generatorArray()
+        input.value = ""
+    }
+
+
+    )
+</script>
+
+</html>
